@@ -35,6 +35,6 @@ UsersController.create({body: {name: "Silva World da silva", age: "21"}}).then( 
 
 const express = require('express')
 const app = express()
-app.use( new Router(require('./app/routes/users'), express.Router(), UsersController)  )
-app.use( new Router(require('./app/routes/posts'), express.Router(), PostsController)  )
+app.use( new Router( express.Router(), UsersController, require('./app/routes/users') ) )
+app.use( new Router( express.Router(), PostsController, require('./app/routes/posts') ) )
 app.listen(3000)
