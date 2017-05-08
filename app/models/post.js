@@ -8,12 +8,5 @@ module.exports = ( createModel, {} ) => {
         content: String,
         creatorId: Number 
     })
-
-    model.define_middlewere('insert', (object, next) => {
-        // Send to socket or something
-        console.log("Creating new POST!!!", object.title)
-        next(object)
-    })
-
     return model;
 }

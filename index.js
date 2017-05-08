@@ -4,10 +4,11 @@ const Model = require('./lib/modelInjector')
 const Controller = require("./lib/controller")
 const Router = require('./lib/router')
 
+const Collection = require('./lib/collection')
 const Models = {
     // Listing my models
-    Post: new Model( require('./app/models/post'), require('./lib/database') ),
-    User: new Model( require('./app/models/user'), require('./lib/database') )
+    Post: new Model( require('./app/models/post'), new Collection() /* Memory DB */ ),
+    User: new Model( require('./app/models/user'), new Collection() /* Memory DB */ )
 }
 
 
@@ -34,6 +35,6 @@ UsersController.create({body: {name: "Silva World da silva", age: "21"}}).then( 
 
 const express = require('express')
 const app = express()
-app.use( new Router(express.Router, require('./app/routes/users'), UsersController)  )
-app.use( new Router(express.Router, require('./app/routes/posts'), PostsController)  )
+app.use( new Router(require('./app/routes/users'), express.Router(), UsersController)  )
+app.use( new Router(require('./app/routes/posts'), express.Router(), PostsController)  )
 app.listen(3000)
